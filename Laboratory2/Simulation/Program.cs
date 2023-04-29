@@ -7,6 +7,18 @@ namespace Creatures
 {
     class Program
     {
+        private static void PrintData(List<Colony> predators, List<Colony> preys){
+            Console.WriteLine("__________\npredators: \n");
+            foreach(var predator in predators){
+                Console.WriteLine(predator);
+            }
+
+            Console.WriteLine("\npreys: \n");
+            foreach(var prey in preys){
+                Console.WriteLine(prey);
+            }
+        }
+
         static void Main()
         {
             TextFileReader reader = new TextFileReader("input.txt");
@@ -53,15 +65,7 @@ namespace Creatures
                 }
             }
 
-            foreach(var prey in preys)
-            {
-                Console.WriteLine(prey);
-            }
-
-            foreach(var prey in predators)
-            {
-                Console.WriteLine(prey);
-            }
+            PrintData(predators,preys);
 
             int originalCount = preys.Sum(p=>p.Number); // change later
             int year =0;
@@ -82,12 +86,7 @@ namespace Creatures
                     if(preys[nextPrey].Species.IsExtinct)
                         preys.Remove(preys[nextPrey]);
                 }
-                foreach(var predator in predators){
-                    Console.WriteLine(predator);
-                }
-                foreach(var prey in preys){
-                    Console.WriteLine(prey);
-                }
+                PrintData(predators,preys);
                 year++;
             }
          }
