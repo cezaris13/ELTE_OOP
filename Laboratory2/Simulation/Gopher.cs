@@ -1,9 +1,4 @@
-public class Gopher : Prey {
-    public Gopher(){
-        TimePeriod = 4;
-        MultiplyFactor = 2;
-        MaxColony = 200;
-        ResetColony = 40;
-        PredatorFactor = 2;
-    }
+public class Gopher : Prey
+{
+    public Gopher() : base(4, 200, 40, 2, 2) { }
 }

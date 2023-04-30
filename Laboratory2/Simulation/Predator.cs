@@ -1,35 +1,46 @@
-public class Predator : Species{
-    public int Child{get; protected set;}
-    public int PerAnimal{get; protected set;}
+public class Predator : Species
+{
+    protected readonly int _child;
+    protected readonly int _perAnimal;
 
-    public Predator() {
-        TimePeriod = 8;
+    public Predator(int child, int perAnimal)
+    {
+        _timePeriod = 8;
+        _child = child;
+        _perAnimal = perAnimal;
     }
 
-    public override int Reproduce(int number, int year){
-        if(year % TimePeriod == 0)
-            number += (int)(MultiplicationFactor() * number);
-        return number;
+    protected override double MultiplicationFactor
+    {
+        get
+        {
+            return _child / _perAnimal;
+        }
     }
 
-    public override double MultiplicationFactor(){
-        return Child/PerAnimal;
+    public override int Reproduce(int populationNumber, int year)
+    {
+        if (year % _timePeriod == 0)
+            populationNumber += (int)(MultiplicationFactor * populationNumber);
+        return populationNumber;
     }
 
-    public void Attack(int predatorNumber, Colony preyColony){
-        if(!preyColony.Species.IsPrey())
+    public void Attack(ref int predatorNumber, Colony preyColony)
+    {
+        if (!preyColony.Species.IsPrey())
             return;
-        var prey = (Prey)preyColony.Species;
 
-        var number = preyColony.Number;
-        var success = prey.Attacked(ref number,predatorNumber); // retrieve unfeeded predator count
-        preyColony.Number = number;
+        var preySpecies = (Prey)preyColony.Species;
+        var preyColonyNumber = preyColony.Number;
+        var unfedPredators = preySpecies.Attacked(ref preyColonyNumber, predatorNumber);
+        preyColony.Number = preyColonyNumber;
 
-        // preyColony.Species
-
+        if (preyColony.IsExtinct)
+            predatorNumber -= unfedPredators / 4;
     }
 
-    public override bool IsPredator(){
+    public override bool IsPredator()
+    {
         return true;
     }
 }

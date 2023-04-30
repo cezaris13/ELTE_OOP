@@ -1,24 +1,11 @@
 using System;
 using TextFile;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Creatures
 {
     class Program
     {
-        private static void PrintData(List<Colony> predators, List<Colony> preys){
-            Console.WriteLine("__________\npredators: \n");
-            foreach(var predator in predators){
-                Console.WriteLine(predator);
-            }
-
-            Console.WriteLine("\npreys: \n");
-            foreach(var prey in preys){
-                Console.WriteLine(prey);
-            }
-        }
-
         static void Main()
         {
             TextFileReader reader = new TextFileReader("input.txt");
@@ -29,8 +16,9 @@ namespace Creatures
 
             var predators = new List<Colony>();
             var preys = new List<Colony>();
-            for(int i =0;i<preyColonies+predatorColonies;i++){
-            // discuss with the lecturer about inconsistencies in the input file given, and ask whether it shpuld be 2 separate fors or 1 big
+            for (int i = 0; i < preyColonies + predatorColonies; i++)
+            {
+                // discuss with the lecturer about inconsistencies in the input file given, and ask whether it shpuld be 2 separate fors or 1 big
                 char[] separators = new char[] { ' ', '\t' };
                 Colony colony = null;
 
@@ -55,40 +43,76 @@ namespace Creatures
                     }
                     colony = new Colony(name, number, species);
                 }
-                if (colony != null) {
-                    if(colony.Species.IsPrey()){
+                if (colony != null)
+                {
+                    if (colony.Species.IsPrey())
+                    {
                         preys.Add(colony);
                     }
-                    else{
+                    else
+                    {
                         predators.Add(colony);
                     }
                 }
             }
 
-            PrintData(predators,preys);
+            PrintData(predators, preys);
 
-            int originalCount = preys.Sum(p=>p.Number); // change later
-            int year =0;
+            int year = 0;
             var random = new Random();
-            while(preys.Count() > 0 && preys.Sum(p=>p.Number) < 4*originalCount){
-                foreach(var predator in predators){
+            int originalCount = PreyColonyCount(preys);
+            while (preys.Count > 0 && PreyColonyCount(preys) < 4 * originalCount)
+            {
+                Console.WriteLine($"\nyear:({year})");
+                foreach (var predator in predators)
+                {
                     predator.Reproduce(year);
                 }
-                foreach(var prey in preys){
+                foreach (var prey in preys)
+                {
                     prey.Reproduce(year);
                 }
 
-                foreach(var predator in predators){
-                    if(preys.Count()<=0)
+                foreach (var predator in predators)
+                {
+                    if (preys.Count <= 0)
                         continue;
-                    var nextPrey = random.Next() % preys.Count();
-                    ((Predator)predator.Species).Attack(predator.Number,preys[nextPrey]);
-                    if(preys[nextPrey].Species.IsExtinct)
+                    var nextPrey = random.Next() % preys.Count;
+                    var number = predator.Number;
+                    ((Predator)predator.Species).Attack(ref number, preys[nextPrey]);
+                    if (preys[nextPrey].IsExtinct)
                         preys.Remove(preys[nextPrey]);
+                    if (predator.IsExtinct)
+                        predators.Remove(predator);
                 }
-                PrintData(predators,preys);
+                PrintData(predators, preys);
                 year++;
             }
-         }
+        }
+
+        private static int PreyColonyCount(List<Colony> preys)
+        {
+            var preysCount = 0;
+            foreach (var prey in preys)
+            {
+                preysCount += prey.Number;
+            }
+            return preysCount;
+        }
+
+        private static void PrintData(List<Colony> predators, List<Colony> preys)
+        {
+            Console.WriteLine("__________\npredators: \n");
+            foreach (var predator in predators)
+            {
+                Console.WriteLine(predator);
+            }
+
+            Console.WriteLine("\npreys: \n");
+            foreach (var prey in preys)
+            {
+                Console.WriteLine(prey);
+            }
+        }
     }
 }

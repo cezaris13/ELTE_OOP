@@ -1,9 +1,4 @@
-public class Lemming : Prey {
-    public Lemming(){
-        TimePeriod = 2;
-        MultiplyFactor = 2;
-        MaxColony = 200;
-        ResetColony = 30;
-        PredatorFactor = 4;
-    }
+public class Lemming : Prey
+{
+    public Lemming() : base(2, 200, 30, 2, 4) { }
 }

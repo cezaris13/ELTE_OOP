@@ -1,16 +1,22 @@
-public abstract class Species {
-    public int TimePeriod {get; protected set;}
-    public bool IsExtinct {get; protected set;}
+public abstract class Species
+{
+    public bool IsExtinct { get; set; }
+    protected int _timePeriod;
 
-    public abstract double MultiplicationFactor();
+    protected abstract double MultiplicationFactor
+    {
+        get;
+    }
 
-    public abstract int Reproduce(int number, int year);
+    public abstract int Reproduce(int populationNumber, int year);
 
-    public virtual bool IsPrey(){
+    public virtual bool IsPrey()
+    {
         return false;
     }
 
-    public virtual bool IsPredator(){
+    public virtual bool IsPredator()
+    {
         return false;
     }
 }

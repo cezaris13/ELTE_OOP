@@ -1,6 +1,4 @@
-public class Owl: Predator{
-    public Owl(): base(){
-        Child = 1;
-        PerAnimal = 4;
-    }
+public class Owl : Predator
+{
+    public Owl() : base(1, 4) { }
 }
