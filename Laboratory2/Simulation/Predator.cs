@@ -34,8 +34,7 @@ public class Predator : Species
         var preyColonyNumber = preyColony.Number;
         var unfedPredators = preySpecies.Attacked(ref preyColonyNumber, predatorNumber);
         preyColony.Number = preyColonyNumber;
-
-        if (preyColony.IsExtinct)
+        if(unfedPredators != 0)
             predatorNumber -= unfedPredators / 4;
     }
 

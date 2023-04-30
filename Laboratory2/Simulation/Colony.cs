@@ -7,11 +7,7 @@ public class Colony
     {
         get
         {
-            return Species.IsExtinct;
-        }
-        set
-        {
-            Species.IsExtinct = value;
+            return Number <= 0;
         }
     }
 

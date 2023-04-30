@@ -34,12 +34,12 @@ namespace Creatures
 
                     switch (type)
                     {
-                        case 'l': species = new Lemming(); break;
-                        case 'h': species = new Hare(); break;
-                        case 'g': species = new Gopher(); break;
-                        case 'w': species = new Wolf(); break;
-                        case 'o': species = new Owl(); break;
-                        case 'f': species = new Fox(); break;
+                        case 'l': species = Lemming.Instance; break;
+                        case 'h': species = Hare.Instance; break;
+                        case 'g': species = Gopher.Instance; break;
+                        case 'w': species = Wolf.Instance; break;
+                        case 'o': species = Owl.Instance; break;
+                        case 'f': species = Fox.Instance; break;
                     }
                     colony = new Colony(name, number, species);
                 }

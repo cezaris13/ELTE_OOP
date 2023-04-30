@@ -1,4 +1,10 @@
+using System;
+
 public class Hare : Prey
 {
-    public Hare() : base(2, 100, 20, 1.5, 2) { }
+    private static readonly Lazy<Hare> lazy = new Lazy<Hare>(() => new Hare());
+
+    public static Hare Instance { get { return lazy.Value; } }
+
+    private Hare() : base(2, 100, 20, 1.5, 2) { }
 }

@@ -1,6 +1,5 @@
 public abstract class Species
 {
-    public bool IsExtinct { get; set; }
     protected int _timePeriod;
 
     protected abstract double MultiplicationFactor

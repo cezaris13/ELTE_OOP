@@ -36,8 +36,8 @@ public class Prey : Species
     {
         var unfedPredators = preyCount / _predatorFactor;
         preyCount -= _predatorFactor * predatorCount;
-        IsExtinct = preyCount <= 0;
-        return IsExtinct ? unfedPredators : 0;
+        // IsExtinct = preyCount <= 0;
+        return preyCount <=0 ? unfedPredators : 0;
     }
 
     public override bool IsPrey()
