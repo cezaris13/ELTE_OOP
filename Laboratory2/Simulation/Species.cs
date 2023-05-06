@@ -13,9 +13,4 @@ public abstract class Species
     {
         return false;
     }
-
-    public virtual bool IsPredator()
-    {
-        return false;
-    }
 }

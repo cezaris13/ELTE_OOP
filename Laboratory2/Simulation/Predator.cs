@@ -37,9 +37,4 @@ public abstract class Predator : Species
         if(unfedPredators != 0)
             predatorNumber -= unfedPredators / 4;
     }
-
-    public override bool IsPredator()
-    {
-        return true;
-    }
 }
