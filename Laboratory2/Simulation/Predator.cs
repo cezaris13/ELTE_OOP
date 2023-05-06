@@ -1,9 +1,9 @@
-public class Predator : Species
+public abstract class Predator : Species
 {
     protected readonly int _child;
     protected readonly int _perAnimal;
 
-    public Predator(int child, int perAnimal)
+    protected Predator(int child, int perAnimal)
     {
         _timePeriod = 8;
         _child = child;

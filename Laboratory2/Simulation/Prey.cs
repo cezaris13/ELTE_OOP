@@ -1,11 +1,11 @@
-public class Prey : Species
+public abstract class Prey : Species
 {
     protected readonly int _maxColony;
     protected readonly int _resetColony;
     protected readonly double _multiplyFactor;
     protected readonly int _predatorFactor;
 
-    public Prey(int timePeriod, int maxColony, int resetColony, double multiplyFactor, int predatorFactor)
+    protected Prey(int timePeriod, int maxColony, int resetColony, double multiplyFactor, int predatorFactor)
     {
         _timePeriod = timePeriod;
         _maxColony = maxColony;
