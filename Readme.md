@@ -13,8 +13,11 @@ Every function required to have mathematical definition of the functions, specif
 $Set(n) = \{a\in \mathbb{Z} \ | \  \forall i,j \in [1..n] : i \neq j \rightarrow a[i] \ne a[j]\}$
 ### Specification of insert element to set
 $A=(s:Set, e:\mathbb{Z})$
+
 $Pre=(s=s^{\prime})$
+
 $Post=( Pre  = s = s ^\prime\cup\{e\})$
+
 $s=\text{output values}, s^\prime=\text{input values}$
 
 ### Remove element from set structugram
@@ -38,9 +41,13 @@ The program should read the colonies from a text file. The first line contains t
 Every function required to have mathematical definition of the functions, specification, analogy, structugrams and a class diagram.
 
 ### Specification of one iteration simulation
-$A=(preys:Colony^*, predators:Colony^*, year:int)$
+
+$A=(preys:Colony', predators:Colony', year:int)$
+
 $Pre=(preys=preys' \land predators = predators' \land year>0)$
+
 $Post = (\forall i\in[1..|preys|] : preys[i].Reproduce(year)\land \forall i\in[1..|predators|]:predators[i].Reproduce(year)$
+
 $\land \forall i \in [1..|predators|]: preys[i],predators[i] = predators[i].Attack(prey[random()]))$
 ### Laboratory work 2 analogy
 ![image](./Images/Lab2Analogy.png)
