@@ -361,6 +361,6 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
-*.pdf
 *.mkv
 *.mp4
+*.exe
